@@ -55,7 +55,7 @@ var postData = await response.json();
 function addDataToDOM(postData) {
  
   var table=document.getElementById('data');
-  table.classList.add('blog-post');
+  table.classList.add('add');
   for(let x of postData.reverse())
   {
     var row=table.insertRow(0);

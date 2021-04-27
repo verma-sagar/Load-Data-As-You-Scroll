@@ -8,7 +8,7 @@ let isScrolled=false;
 var postData=[];
 var displayData=[];
 
-  document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
 
  async function getPost() {
 	// Storing response
@@ -56,8 +56,8 @@ function showLoading() {
 
 function addDataToDOM(postData) {
  
-  var table=document.getElementById('employees');
-  table.classList.add('blog-post');
+  var table=document.getElementById('data');
+  table.classList.add('add');
   for(let i=0;i<postData.length;i++)
   {
     var row=table.insertRow(-1);
