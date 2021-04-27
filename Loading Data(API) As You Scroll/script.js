@@ -1,6 +1,5 @@
 // api url
 const api_url ="https://jsonplaceholder.typicode.com/albums";
-	
 const container = document.getElementById('container');
 const loading = document.querySelector('.loading');
 let post_offset = 12;
@@ -10,16 +9,19 @@ var displayData=[];
 
 document.addEventListener('DOMContentLoaded', () => {
 
- async function getPost() {
+ async function getPost() 
+ {
 	// Storing response
-  if(postData.length === 0){
+  if(postData.length === 0)
+  {
   const response = await fetch(api_url);
   // Storing data in form of JSON
   postData = await response.json();
   displayData=postData.slice(0,12);
   addDataToDOM(displayData);
   }
-	if(post_offset < postData.length){
+	if(post_offset < postData.length)
+  {
 	addDataToDOM([postData[post_offset]]);
 	post_offset++;
 	}
@@ -31,21 +33,24 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('scroll', () => {
   const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
-  if(clientHeight + scrollTop >= scrollHeight - 5 && !isScrolled) {
+  if(clientHeight + scrollTop >= scrollHeight - 5 && !isScrolled) 
+  {
     isScrolled = true;
     // show the loading animation
     showLoading();
   }
 });
 
-function showLoading() {
-  if(post_offset < postData.length){
+function showLoading()
+ {
+  if(post_offset < postData.length)
+  {
     loading.classList.add('show');
-
     // load more data
     setTimeout(getPost, 1000)
   }
-  else{
+  else
+  {
     // end has been reached, no more posts available
     const postElement1 = document.createElement('div');
     postElement1.innerHTML = 
@@ -54,8 +59,8 @@ function showLoading() {
   }
 }
 
-function addDataToDOM(postData) {
- 
+function addDataToDOM(postData)
+ { 
   var table=document.getElementById('data');
   table.classList.add('add');
   for(let i=0;i<postData.length;i++)
@@ -69,5 +74,5 @@ function addDataToDOM(postData) {
   }
   container.appendChild(table);
   loading.classList.remove('show');
-}
-  });
+  }
+});
