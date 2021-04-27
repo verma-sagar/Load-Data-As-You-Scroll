@@ -198,11 +198,10 @@ async function getPost() {
 
 function addDataToDOM(data) {
   const postElement = document.createElement('tr');
-  postElement.classList.add('blog-post');
+  postElement.classList.add('add');
   postElement.innerHTML = 
   `<td>${data.id} </td>
   <td>${data.title}</td>`;
   container.appendChild(postElement);
-
   loading.classList.remove('show');
 }

@@ -2,7 +2,7 @@
 const api_url ="https://jsonplaceholder.typicode.com/albums";
 const container = document.getElementById('container');
 const loading = document.querySelector('.loading');
-let post_offset = 12;
+let post_offset = 9;
 let isScrolled=false;
 var postData=[];
 var displayData=[];
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const response = await fetch(api_url);
   // Storing data in form of JSON
   postData = await response.json();
-  displayData=postData.slice(0,12);
+  displayData=postData.slice(0,9);
   addDataToDOM(displayData);
   }
 	if(post_offset < postData.length)
