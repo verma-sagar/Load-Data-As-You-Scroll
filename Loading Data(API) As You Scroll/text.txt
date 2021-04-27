@@ -1,0 +1,113 @@
+// api url
+const api_url ="https://jsonplaceholder.typicode.com/albums";
+	
+const container = document.getElementById('container');
+const loading = document.querySelector('.loading');
+let post_offset = 0;
+let isScrolled=false;
+
+
+  getPost();
+
+
+window.addEventListener('scroll', () => {
+  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+  if(clientHeight + scrollTop >= scrollHeight - 5 && !isScrolled) {
+    isScrolled = true;
+    // show the loading animation
+    showLoading();
+  }
+});
+
+function showLoading() {
+  if(post_offset < api_url.length){
+    loading.classList.add('show');
+
+    // load more data
+    setTimeout(getPost, 1000)
+  }
+  else{
+    // end has been reached, no more posts available
+    const postElement1 = document.createElement('div');
+    postElement1.innerHTML = 
+    `<div style="text-align:center;">You Have Reached End</div>`;
+    container.appendChild(postElement1);
+  }
+}
+
+
+async function getPost() {
+  // Storing response
+const response = await fetch(api_url);
+	
+// Storing data in form of JSON
+var postData = await response.json();
+
+	addDataToDOM(postData);
+	if(post_offset < api_url.length){
+    addDataToDOM(api_url[post_offset]);
+    post_offset++;
+  }
+  isScrolled = false;
+}
+
+function addDataToDOM(postData) {
+ 
+  var table=document.getElementById('data');
+  table.classList.add('blog-post');
+  for(let x of postData.reverse())
+  {
+    var row=table.insertRow(0);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+  
+    cell1.innerHTML = `${x.id}`;
+    cell2.innerHTML = `${x.title}`;
+  }
+  container.appendChild(table);
+
+  loading.classList.remove('show');
+}
+
+
+// api url
+const api_url =
+	"https://jsonplaceholder.typicode.com/albums";
+
+// Defining async function
+async function getapi(url) {
+	
+	// Storing response
+	const response = await fetch(url);
+	
+	// Storing data in form of JSON
+	var data = await response.json();
+	console.log(data);
+	show(data);
+}
+// Calling that async function
+getapi(api_url);
+
+const loading = document.querySelector('.loading');
+let post_offset = 0;
+
+// Function to define innerHTML for HTML table
+function show(data) {
+	let tab =
+		`<tr>
+		<th>ID</th>
+		<th>Title</th>
+		</tr>`;
+	
+	// Loop to access all rows
+	for (let r of data) {
+		tab += `<tr>
+	<td>${r.id} </td>
+	<td>${r.title}</td>
+		
+</tr>`;
+	}
+	// Setting innerHTML as tab variable
+	document.getElementById("employees").innerHTML = tab;
+}
